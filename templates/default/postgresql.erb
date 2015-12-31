@@ -1,0 +1,22 @@
+# controlled by cookbook 'pgha'
+
+listen_addresses = '*'
+port = <%= @port %>
+max_connections = 300
+max_wal_senders = 3
+wal_level = hot_standby
+max_replication_slots = 4
+archive_mode = on
+archive_command = 'cp %p <%= @archive_path %>/%f'
+hot_standby = on
+
+
+log_destination = 'stderr'
+logging_collector = on	
+log_directory = 'pg_log'		
+log_filename = 'postgresql-%a.log'	
+log_truncate_on_rotation = on	
+log_rotation_age = 1d	
+log_rotation_size = 0
+log_line_prefix = '< %m >'
+

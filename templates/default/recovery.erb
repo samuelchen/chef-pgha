@@ -1,0 +1,12 @@
+#
+# template for recover.conf. controlled by coobkook 'pgha'
+#
+
+standby_mode = on
+primary_slot_name = '<%= @slot %>'
+primary_conninfo = 'host=<%= @master_fqdn %> port=<%= @port %> user=<%= @rep_user %> password=<%= @rep_pwd %>'
+restore_command = 'cp <%= @archive_path %>/%f %p'    
+trigger_file = '<%= @trigger_file %>'
+recovery_target_timeline = 'latest'
+
+

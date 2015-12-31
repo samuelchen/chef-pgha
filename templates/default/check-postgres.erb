@@ -1,0 +1,9 @@
+#!/bin/bash
+
+count=`service postgresql-9.4 status|grep -v grep|grep 'is running'|wc -l`
+if [ $count -gt 0 ]; then
+    exit 0
+else
+    exit 1
+fi
+

@@ -1,0 +1,29 @@
+
+global_defs {
+    router_id <%= @node_name %>
+}
+vrrp_script check_postgres
+{
+    script "/etc/keepalived/<%= @check_script %>"
+    interval <%= @interval %>
+    fall 1
+}
+vrrp_instance VI_1 {
+    state BACKUP
+    nopreempt
+    interface <%= @interface %>
+    virtual_router_id <%= @virtual_router_id %>
+        priority <%= @priority %>
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    track_script {
+        check_postgres
+    }
+    virtual_ipaddress {
+        <%= @dbvip %>
+    }
+}
+
